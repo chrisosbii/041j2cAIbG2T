@@ -1,1 +1,20 @@
+/** 
+ * Custom CSS Variables
+ */
+:root {
+    /* What to color input boxes as */
+    --boxColor: #13293d;
+    /* light color variable (was #83EEFF) */
+    --light: #129cd8;
+    /* background color */
+    --background: #B2beb5;
+}
 
+
+/**
+ * CSS Class Elements Area
+ */
+
+.parrot{
+    height: 28px;
+}
