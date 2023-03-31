@@ -14,7 +14,14 @@
 /** 
  * CSS Universal Elements Area
  */
+header{
+    width: 100%;
+    font-size: xx-large;
+    flex: auto;
+    padding: 1%;
+}
 main{
+    flex: auto;
     font-size: var(--mediumFontSize);
     display: block;
     margin-left: auto;
@@ -44,6 +51,20 @@ footer {
 /**
  * CSS ID Elements Area
  */
+#highscorelink{
+    color: var(--lightPurple);
+    max-width: 45%;
+    text-align: left;
+}
+#highscorelink:hover{
+    color: var(--boxColor)
+}
+#timer{
+    max-width: 45%;
+    right: 1%;
+    text-align: right;
+    position: absolute;
+}
 #title{
     font-size: xxx-large;
     font-weight: bolder;
