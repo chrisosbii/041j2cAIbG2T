@@ -51,6 +51,7 @@ function setTime(seconds){
 function landingPage(){
   //clear page
   clearPage();
+  header.style.visibility = 'visable';
   //reset timer
   secondsLeft = 75;
   setTime(secondsLeft);
@@ -176,6 +177,7 @@ function storeHS(){
 function printHS(){
   // clear the page
   clearPage();
+  header.setAttribute("hidden", "hidden");
   title.textContent = "High Scores:";
   //create sorted list object
   var order = document.createElement("ol");
@@ -293,6 +295,12 @@ function showAnswer(str){
  * Clears the page of content
  */
 function clearPage(){
+  //check if header is hidden
+  
+  var test = header.getAttribute("hidden");
+  if(test){
+    header.removeAttribute("hidden");
+  }
   title.textContent = "";
   body.textContent = "";
   while (body.firstChild) {
@@ -304,6 +312,7 @@ function clearPage(){
   }
 }
 
+//init activities
 landingPage();
 loadHS();
 
