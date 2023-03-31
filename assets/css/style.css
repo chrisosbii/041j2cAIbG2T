@@ -3,18 +3,37 @@
  */
 :root {
     /* What to color input boxes as */
-    --boxColor: #13293d;
+    --boxColor: #211855;
     /* light color variable (was #83EEFF) */
-    --light: #129cd8;
+    --lightPurple: #a327dd;
     /* background color */
     --background: #B2beb5;
+}
+
+/** 
+ * CSS Universal Elements Area
+ */
+main{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    padding: 30px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+/* difines padding, clear, font, and text slignment for universal footer objects*/
+footer {
+    padding: 30px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
 }
 
 
 /**
  * CSS Class Elements Area
  */
-
 .parrot{
     height: 28px;
 }
