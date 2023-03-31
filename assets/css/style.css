@@ -39,6 +39,10 @@ button{
     margin: 10px;
     width: auto;
 }
+button:hover{
+    background-color: var(--lightPurple);
+    color: black;
+}
 button input{
     font-size: xx-large;
 }
