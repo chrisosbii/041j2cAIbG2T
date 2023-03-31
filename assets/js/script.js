@@ -15,24 +15,30 @@ var secondsLeft;
 var score;
 var answerSeconds;
 var quizRunning = false;
+var order = [];
+var number = 0;
 
 // start quiz timer function
 function startQuiz() {
+  //resets if its running
+  quizRunning = true;
+  //reset number of qs
+  number = 0;
+  //scramble the order
+  order = scrambler();
   //render the questions!
-  questions();
+  displayQs();
   // Sets interval in variable
   var timerInterval = setInterval(function() {
-    quizRunning = true;
     secondsLeft--;
     setTime(secondsLeft);
     //if less then 1 then done
-    if(secondsLeft < 1 && quizRunning) {
+    if(secondsLeft < 1 || !quizRunning) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       //render finished
       quizFinish();
     }
-
   }, 1000);
 }
 
@@ -63,14 +69,59 @@ function landingPage(){
     buttons.appendChild(start);
 }
 // render questions
-function questions(){
+function displayQs(){
   //clear page
   clearPage();
+  
+  //check if we are on prob 5
+  if(number > 4){
+    quizRunning = false;
+    console.log(quizRunning + "");
+    quizFinish();
+    return;
+  }
 
+  //set q to title
+  title.textContent = questionList[order[number]].question;
+  // loop through answers and append functions
+  for (var i = 0; i < questionList[order[number]].options.length; i ++){
+    //make a new button
+    var tempButton = document.createElement("button");
+    tempButton.textContent = i + ". " + questionList[order[number]].options[i];
+    tempButton.className = "quizButton";
+    //check if right answer
+    if(i == questionList[order[number]].answer){
+      tempButton.addEventListener("click", function(event) {
+        //prevent default
+        event.preventDefault();
+        //get the input box
+        correctAns();
+      })
+    }else{
+      tempButton.addEventListener("click", function(event) {
+        //prevent default
+        event.preventDefault();
+        //get the input box
+        wrongAns();
+      })
+    }
+    buttons.appendChild(tempButton);
+  }
 }
 // scramble input
 function scrambler(){
-
+  var output = [];
+  var tempNum = 0;
+  for (var i = 0; i < 5; i++){
+    tempNum = Math.floor(Math.random()*questionList.length);
+    if(output.includes(tempNum)){
+      i--;
+    }
+    else{
+      output.push(tempNum);
+    }
+  }
+  return output;
 }
 // when quiz is over do this
 function quizFinish() {
@@ -117,6 +168,8 @@ function loadHS(){
 function correctAns(){
   //pring correct response
   showAnswer("Correct!");
+  number ++;
+  displayQs()
 }
 /**
  * Update user they provided a wrong answer
@@ -129,6 +182,8 @@ function wrongAns(){
   else{
     secondsLeft = 0;
   }
+  number ++;
+  displayQs()
 }
 /**
  * Takes in the answer that you want to show
@@ -157,15 +212,71 @@ function showAnswer(str){
 function clearPage(){
   title.textContent = "";
   body.textContent = "";
-  main.style.textAlign = "right";
+  main.style.textAlign = "left";
   while (buttons.firstChild) {
     buttons.removeChild(buttons.firstChild);
   }
 }
 
-//landingPage();
+landingPage();
 
 //test things here
+
 //landingPage();
 //correctAns();
-quizFinish();
+//quizFinish();
+
+//////////////////////////////
+/* Add in quiz objects here */
+//////////////////////////////
+
+let questionList = [
+  {
+    "question": "Javascript is an _______ language?", 
+    "options": ["Object-Oriented", "Object-Based", "Procedural", "None of the above"], 
+    "answer": 0
+  },
+  {
+    "question": "Which of the following keywords is used to define a variable in Javascript?", 
+    "options": ["var", "let", "var and let", "None of the above"], 
+    "answer":2 
+  },
+  {
+    "question": "Which of the method is used to get HTML element in javascript?", 
+    "options":["getElementbyId()", "getElementsByClassName()", "Both getElementbyId() and getElementsByClassName()", "None of the above"], 
+    "answer":2
+  },
+  {
+    "question": "What does NaN means?", 
+    "options": ["Negative Number", "Not a Number", "Negative Nancy"], 
+    "answer": 1
+  },
+  {
+    "question": "How do we put Javascript inside HTML?", 
+    "options":["js", "javascript", "scripting", "script"], 
+    "answer":3
+  },
+  {
+    "question": "The 'let' and 'var' are known as:", 
+    "options":["Declaration statements", "Prototypes", "Data Types", "Keywords"], 
+    "answer":1
+  },
+  {
+    "question": "Which one is not a comparison operator?", 
+    "options":["=", "<", ">", "!="], 
+    "answer":0
+  },
+  {
+    "question": "What does DOM stands for in javascript?", 
+    "options":["Document Object Model", "Document Object Manipulation", "Document Objective Model"], 
+    "answer":1
+  },
+  {
+    "question": "Where do you add javacript in the html file?", 
+    "options":["<head>", "<body>", "<footer>"], 
+    "answer":1
+  }
+];
+//questionList[1] = {question: "", options:["", "", "", ""], answer:2};
+//questionList[1] = {question: "", options:["", "", "", ""], answer:2};
+//questionList[1] = {question: "", options:["", "", "", ""], answer:2};

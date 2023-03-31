@@ -37,6 +37,7 @@ button{
     padding: 1%;
     border-radius: 10px;
     margin: 10px;
+    width: auto;
 }
 button input{
     font-size: xx-large;
@@ -44,9 +45,9 @@ button input{
 /* difines padding, clear, font, and text slignment for universal footer objects*/
 footer {
     position: absolute;
+    width: 100%;
     bottom: 10%;
     padding: 30px;
-    right:45%;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
@@ -70,6 +71,11 @@ footer {
     padding-left: 1%;
     padding-right: 1%;
     border-radius: 10px;
+}
+.quizButton{
+    position: relative;
+    width: 100%;
+    text-align: left;
 }
 .parrot{
     height: 28px;
