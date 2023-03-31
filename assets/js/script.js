@@ -1,6 +1,6 @@
 /* Get Objects from index.html */
 // get the timer object
-var timer = document.querySelector("#time");
+var timer = document.querySelector("#timer");
 
 // get the main object
 var main = document.getElementById("main");
@@ -33,7 +33,7 @@ function startQuiz() {
 }
 
 function setTime(seconds){
-  //timer.textContent = "Time: " + seconds; 
+  timer.textContent = "Time: " + seconds; 
 }
 
 // render loading page
@@ -83,7 +83,8 @@ function storeHS(name){
 
 }
 function printHS(){
-
+  clearPage();
+  console.log("in print hs");
 }
 //make a function to view high scores
 function loadHS(){
@@ -131,9 +132,9 @@ function clearPage(){
     title.textContent = "";
     body.textContent = "";
     main.style.textAlign = "right";
-    main.clildNodes.forEach(element => {
-        this.remove();
-    });
+    //main.clildNodes.forEach(element => {
+    //    this.remove();
+    //});
 }
 
 //landingPage();
