@@ -17,6 +17,7 @@ var answerSeconds;
 var quizRunning = false;
 var order = [];
 var number = 0;
+var hs = [];
 
 // start quiz timer function
 function startQuiz() {
@@ -48,32 +49,34 @@ function setTime(seconds){
 
 // render loading page
 function landingPage(){
-    //reset timer
-    secondsLeft = 75;
-    setTime(secondsLeft);
-    //set score to 0;
-    score = 0;
-    title.textContent = "Coding Quiz Challenge";
-    body.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
-    main.style.textAlign = "center";
+  //clear page
+  clearPage();
+  //reset timer
+  secondsLeft = 75;
+  setTime(secondsLeft);
+  //set score to 0;
+  score = 0;
+  title.textContent = "Coding Quiz Challenge";
+  body.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+  main.style.textAlign = "center";
 
-    //make a start quiz button
-    var start = document.createElement("button");
-    start.textContent = "Start Quiz";
-    start.addEventListener("click", function(event) {
-      //prevent default
-      event.preventDefault();
-      //get the input box
-      startQuiz();
-    })
-    buttons.appendChild(start);
+  //make a start quiz button
+  var start = document.createElement("button");
+  start.textContent = "Start Quiz";
+  start.addEventListener("click", function(event) {
+    //prevent default
+    event.preventDefault();
+    //get the input box
+    startQuiz();
+  })
+  buttons.appendChild(start);
 }
 // render questions
 function displayQs(){
   //clear page
   clearPage();
   
-  //check if we are on prob 5
+  //check if we are on prob #5
   if(number > 4){
     quizRunning = false;
     console.log(quizRunning + "");
@@ -145,22 +148,102 @@ function quizFinish() {
   submit.type = "submit";
   submit.className = "form-submit-button";
   submit.textContent = "Submit";
+  submit.addEventListener("click", storeHS);
   form.appendChild(lable);
   form.appendChild(input);
   form.appendChild(submit);
   buttons.appendChild(form);
 }
+/**
+ * Function to store new HS (high scores) into local storage in the browser
+ * @param {*} event 
+ */
+function storeHS(){
 
-function storeHS(name){
+  var currentName = document.querySelector(".form-submit-text").value.trim();
+  var currentScore = {
+    name: currentName,
+    score: score
+  }
+  hs.push(currentScore);
+
+  localStorage.setItem("hs", JSON.stringify(hs));
+
+  printHS();
 
 }
+
 function printHS(){
+  // clear the page
   clearPage();
-  console.log("in print hs");
+  title.textContent = "High Scores:";
+  //create sorted list object
+  var order = document.createElement("ol");
+  var temp;
+
+  //sort the High scores highest to lowest
+  for (var i = 0; i < hs.length; i++){
+    for (var j = i; j < hs.length; j++){
+      if(hs[i].score < hs [j].score){
+        temp = hs[i];
+        hs[i] = hs[j];
+        hs[j] = temp;
+      }
+    }
+  }
+
+  //append all hs items to the list
+  for (var i = 0; i < hs.length; i++){
+    var item = document.createElement("li");
+    item.textContent = hs[i].name + " - " + hs[i].score;
+    order.appendChild(item);
+  }
+
+  //add list to body
+  body.appendChild(order);
+
+  //add button to go back to landing page 
+  var back = document.createElement("button");
+  back.textContent = "Main Menu";
+  back.addEventListener("click", function(event) {
+    //prevent default
+    event.preventDefault();
+    //get the input box
+    landingPage();
+  })
+  buttons.appendChild(back);
+
+  //add button to clear the local storage
+  var clear = document.createElement("button");
+  clear.textContent = "Clear High Score List";
+  clear.addEventListener("click", function(event) {
+    //prevent default
+    event.preventDefault();
+    //delete local storage
+    localStorage.setItem("hs", null);
+    //reload HS
+    loadHS();
+    //reload HS page
+    printHS();
+  })
+  buttons.appendChild(clear);
+
+
 }
-//make a function to view high scores
+/**
+ * Check the local storage for HS and if there load them
+ */
 function loadHS(){
-  
+  // get hs from local storage
+  var temp = JSON.parse(localStorage.getItem("hs"));
+  // if not null store as hs
+  if (temp !== null){
+    hs=temp;
+  }
+  //if null make empty
+  else{
+    hs=[];
+  }
 }
 /**
  * Update user they provided a right answer
@@ -212,6 +295,9 @@ function showAnswer(str){
 function clearPage(){
   title.textContent = "";
   body.textContent = "";
+  while (body.firstChild) {
+    body.removeChild(body.firstChild);
+  }
   main.style.textAlign = "left";
   while (buttons.firstChild) {
     buttons.removeChild(buttons.firstChild);
@@ -219,6 +305,7 @@ function clearPage(){
 }
 
 landingPage();
+loadHS();
 
 //test things here
 
