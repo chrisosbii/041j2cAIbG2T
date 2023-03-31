@@ -14,15 +14,19 @@ var answer = document.getElementById("answer");
 var secondsLeft;
 var score;
 var answerSeconds;
+var quizRunning = false;
 
 // start quiz timer function
 function startQuiz() {
+  //render the questions!
+  questions();
   // Sets interval in variable
   var timerInterval = setInterval(function() {
+    quizRunning = true;
     secondsLeft--;
     setTime(secondsLeft);
     //if less then 1 then done
-    if(secondsLeft < 1) {
+    if(secondsLeft < 1 && quizRunning) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       //render finished
@@ -46,11 +50,23 @@ function landingPage(){
     title.textContent = "Coding Quiz Challenge";
     body.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
     main.style.textAlign = "center";
+
+    //make a start quiz button
+    var start = document.createElement("button");
+    start.textContent = "Start Quiz";
+    start.addEventListener("click", function(event) {
+      //prevent default
+      event.preventDefault();
+      //get the input box
+      startQuiz();
+    })
+    buttons.appendChild(start);
 }
 // render questions
 function questions(){
   //clear page
   clearPage();
+  
 }
 // scramble input
 function scrambler(){
@@ -129,12 +145,12 @@ function showAnswer(str){
  * Clears the page of content
  */
 function clearPage(){
-    title.textContent = "";
-    body.textContent = "";
-    main.style.textAlign = "right";
-    //main.clildNodes.forEach(element => {
-    //    this.remove();
-    //});
+  title.textContent = "";
+  body.textContent = "";
+  main.style.textAlign = "right";
+  while (buttons.firstChild) {
+    buttons.removeChild(buttons.firstChild);
+  }
 }
 
 //landingPage();
