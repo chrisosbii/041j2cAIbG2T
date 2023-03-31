@@ -29,7 +29,7 @@ This project can be viewed by going to [https://chrisosbii.github.io/041j2cAIbG2
 * Added about 10 questions and right now it randomly picks 5 of them
 
 ## Regrests:
-* Score is based purly on if you answered a question as fast as you can
+* Score is based purely on if you answered a question as fast as you can
 * Would have liked to made the answer buttons have a scrambled order
 * Better colors
 * timer does not end right away sometimes I assume this is an issue with where the count is happening
