@@ -7,6 +7,7 @@
     /* light color variable (was #83EEFF) */
     --lightPurple: #a327dd;
     /* background color */
+    --softPurple: #AF8FE9;
     --background: #B2beb5;
     --lightText: grey;
 }
@@ -56,6 +57,13 @@ footer {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
+ol {
+    background-color: var(--softPurple);
+    list-style-position: inside;
+}
+li {
+    padding: 3px;
+}
 
 
 
@@ -90,15 +98,19 @@ footer {
  */
 #highscorelink{
     color: var(--lightPurple);
-    max-width: 45%;
+    background-color: white;
+    border: 2px solid var(--boxColor);
+    width: fit-content;
     text-align: left;
 }
 #highscorelink:hover{
-    color: var(--boxColor)
+    color: var(--boxColor);
+    background-color: var(--lightPurple);
 }
 #timer{
     max-width: 45%;
-    right: 1%;
+    right: 3%;
+    top: 3%;
     text-align: right;
     position: absolute;
 }
