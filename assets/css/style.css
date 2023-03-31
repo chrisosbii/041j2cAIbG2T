@@ -8,12 +8,14 @@
     --lightPurple: #a327dd;
     /* background color */
     --background: #B2beb5;
+    --lightText: grey;
 }
 
 /** 
  * CSS Universal Elements Area
  */
 main{
+    font-size: var(--mediumFontSize);
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -22,6 +24,7 @@ main{
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 /* difines padding, clear, font, and text slignment for universal footer objects*/
 footer {
     padding: 30px;
@@ -36,4 +39,27 @@ footer {
  */
 .parrot{
     height: 28px;
+}
+
+/**
+ * CSS ID Elements Area
+ */
+#title{
+    font-size: xxx-large;
+    font-weight: bolder;
+    padding: 3%;
+}
+#body{
+    font-size: xx-large;
+}
+#buttons{
+    font-size: xx-large;
+}
+#answer{
+    border-top-style: solid;
+    font-size: xx-large;
+    color: var(--lightText);
+    text-align: left;
+    padding: 1%;
+    font-style: italic;
 }

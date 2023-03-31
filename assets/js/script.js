@@ -33,7 +33,7 @@ function startQuiz() {
 }
 
 function setTime(seconds){
-    //timer.textContent = "Time: " + seconds; 
+  //timer.textContent = "Time: " + seconds; 
 }
 
 // render loading page
@@ -49,49 +49,64 @@ function landingPage(){
 }
 // render questions
 function questions(){
+  //clear page
+  clearPage();
+}
+// scramble input
+function scrambler(){
 
 }
-
 // when quiz is over do this
 function quizFinish() {
-    //set score to secondsLeft ... for now...
-    score = secondsLeft;
-    title.textContent = "All done!";
-    body.textContent = 'Your final score is ${score}. \n Enter initials: ';
-    //create and append input box
-    var inputs = document.createElement("INPUT");
-    inputs.setAttribute("id", "input");
-    inputs.setAttribute("type", "text");
-    buttons.appendChild(inputs);
-    //create and append button box
-    var newHS = document.createElement("button");
-    newHS.addEventListener("click", function(event) {
-      //prevent default
-      event.preventDefault();
-      //get the input box
-      var temp = document.getElementById("input");
-      //check length?
-      if(temp.length > 0){
-        
-      }
-    })
-    
-    
+  //clear page
+  clearPage();
+  //set score to secondsLeft ... for now...
+  score = secondsLeft;
+  title.textContent = "All done!";
+  body.textContent = 'Your final score is ${score}. \n Enter initials: ';
+  //create and append input box
+  var inputs = document.createElement("INPUT");
+  inputs.setAttribute("id", "input");
+  inputs.setAttribute("type", "text");
+  buttons.appendChild(inputs);
+  //create and append button box
+  var newHS = document.createElement("button");
+  newHS.addEventListener("click", function(event) {
+    //prevent default
+    event.preventDefault();
+    //get the input box
+    storeHS(document.getElementById("input"));
+  })
 }
 
+function storeHS(name){
+
+}
+function printHS(){
+
+}
 //make a function to view high scores
-function highScores(){
-
+function loadHS(){
+  
 }
+/**
+ * Update user they provided a right answer
+ */
 function correctAns(){
-
+  //pring correct response
+  showAnswer("Correct!");
 }
+/**
+ * Update user they provided a wrong answer
+ */
 function wrongAns(){
-
+  showAnswer("Wrong!");
+  secondsLeft = secondsLeft - 10;
 }
 /**
  * Takes in the answer that you want to show
  * Sets a timer for the answer then removes it
+ * updating is independed of clear
  */
 function showAnswer(str){
   answerSeconds = 5;
@@ -121,4 +136,9 @@ function clearPage(){
     });
 }
 
+//landingPage();
+
+//test things here
 landingPage();
+correctAns();
+//quizFinish();
