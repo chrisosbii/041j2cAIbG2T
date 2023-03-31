@@ -31,19 +31,46 @@ main{
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
+button{
+    background-color: var(--boxColor);
+    color: var(--background);
+    padding: 1%;
+    border-radius: 10px;
+    margin: 10px;
+}
+button input{
+    font-size: xx-large;
+}
 /* difines padding, clear, font, and text slignment for universal footer objects*/
 footer {
+    position: absolute;
+    bottom: 10%;
     padding: 30px;
+    right:45%;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
 
+
 /**
  * CSS Class Elements Area
  */
+.form-submit-text{
+    font-size: xx-large;
+    padding-left: .5%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.form-submit-button {
+    font-size: xx-large;
+    background: var(--boxColor);
+    color: var(--background);
+    padding-left: 1%;
+    padding-right: 1%;
+    border-radius: 10px;
+}
 .parrot{
     height: 28px;
 }
@@ -68,19 +95,22 @@ footer {
 #title{
     font-size: xxx-large;
     font-weight: bolder;
-    padding: 3%;
+    padding-top: 3%;
 }
 #body{
+    padding-top: 1.5%;
     font-size: xx-large;
 }
 #buttons{
+    padding-top: 1.5%;
     font-size: xx-large;
 }
 #answer{
+    padding-top: 1.5%;
+    visibility: hidden;
     border-top-style: solid;
     font-size: xx-large;
     color: var(--lightText);
     text-align: left;
-    padding: 1%;
     font-style: italic;
 }

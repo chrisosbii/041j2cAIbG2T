@@ -66,7 +66,7 @@ function landingPage(){
 function questions(){
   //clear page
   clearPage();
-  
+
 }
 // scramble input
 function scrambler(){
@@ -78,21 +78,26 @@ function quizFinish() {
   clearPage();
   //set score to secondsLeft ... for now...
   score = secondsLeft;
+  //align body.text right
+  main.style.textAlign = "left";
   title.textContent = "All done!";
-  body.textContent = 'Your final score is ${score}. \n Enter initials: ';
-  //create and append input box
-  var inputs = document.createElement("INPUT");
-  inputs.setAttribute("id", "input");
-  inputs.setAttribute("type", "text");
-  buttons.appendChild(inputs);
-  //create and append button box
-  var newHS = document.createElement("button");
-  newHS.addEventListener("click", function(event) {
-    //prevent default
-    event.preventDefault();
-    //get the input box
-    storeHS(document.getElementById("input"));
-  })
+  body.textContent = 'Your final score is ' + score + '.';
+//
+
+  var form = document.createElement("form");
+  var lable = document.createElement("label");
+  lable.textContent = "Enter initials:"
+  var input = document.createElement("input");
+  input.type = "text";
+  input.className = "form-submit-text";
+  var submit = document.createElement("input");
+  submit.type = "submit";
+  submit.className = "form-submit-button";
+  submit.textContent = "Submit";
+  form.appendChild(lable);
+  form.appendChild(input);
+  form.appendChild(submit);
+  buttons.appendChild(form);
 }
 
 function storeHS(name){
@@ -118,7 +123,12 @@ function correctAns(){
  */
 function wrongAns(){
   showAnswer("Wrong!");
-  secondsLeft = secondsLeft - 10;
+  if(secondsLeft>9){
+    secondsLeft = secondsLeft - 10;
+  }
+  else{
+    secondsLeft = 0;
+  }
 }
 /**
  * Takes in the answer that you want to show
@@ -156,6 +166,6 @@ function clearPage(){
 //landingPage();
 
 //test things here
-landingPage();
-correctAns();
-//quizFinish();
+//landingPage();
+//correctAns();
+quizFinish();
